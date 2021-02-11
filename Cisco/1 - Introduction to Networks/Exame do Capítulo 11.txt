@@ -1,0 +1,209 @@
+1- Um técnico de redes recém contratado recebeu a tarefa fazer o pedido de um novo hardware para uma empresa de pequeno porte com previsão de grande crescimento. Qual deve ser a principal preocupação do técnico ao escolher os novos dispositivos?
+dispositivos redundantes
+dispositivos modulares
+dispositivos com um número e um tipo fixos de interface
+dispositivos que comportam monitoramento de rede
+R: dispositivos modulares
+
+2- Qual consideração de projeto de rede seria mais importante para uma grande empresa do que para uma pequena empresa?
+redundância
+firewall
+switch com densidade baixa de porta
+Roteador da Internet
+R: redundância
+
+3- Quais dois tipos de tráfego requerem entregas sensíveis ao atraso? (Escolha duas.)
+vídeo
+voz
+Web
+FTP
+e-mail
+R: voz 
+     vídeo
+
+4- Qual serviço define os protocolos e as tecnologias que implementam a transmissão de pacotes de voz em uma rede IP?
+QoS
+NAT
+DHCP
+VoIP
+R: VoIP
+
+5- O administrador de redes de uma pequena empresa está pensando em como escalar a rede nos próximos três anos para que acomode o crescimento projetado. Quais três tipos de informações devem ser usados para planejar o crescimento da rede? (Escolha três.)
+documentação das atuais topologias física e lógica
+análise do tráfego de rede de acordo com protocolos, aplicações e serviços usados na rede
+inventário dos dispositivos que estão em uso na rede
+políticas e procedimentos de recursos humanos para todos os funcionários da empresa
+histórico e declaração de missão da empresa
+listagem dos funcionários atuais e sua função na empresa
+
+R-  inventário dos dispositivos que estão em uso na rede
+    análise do tráfego de rede de acordo com protocolos, aplicações e serviços usados na rede
+   documentação das atuais topologias física e lógica
+
+6- Qual das duas afirmações descreve como avaliar os padrões de fluxo de tráfego e tipos de tráfego de rede, usando um analisador de protocolo? (Escolha duas.)
+Só capturar o tráfego nas áreas da rede que recebem a maior parte do tráfego como os data centers.
+Capturar o tráfego durante as horas de pico de utilização para obter uma boa ideia dos diferentes tipos de tráfego.
+
+Capturar o tráfego nos finais de semana, quando a maioria dos funcionários está de folga.
+Capturar somente o tráfego da WAN, porque o tráfego para a web é o responsável pelo maior volume de tráfego em uma rede.
+Realizar a captura em diferentes segmentos da rede.
+R: Realizar a captura em diferentes segmentos da rede
+     Capturar o tráfego durante as horas de pico de utilização para obter uma boa ideia dos diferentes tipos de tráfego.
+
+7- Alguns roteadores e switches em um wiring closet deram defeito após uma falha na unidade de ar condicionado. Que tipo de ameaça a situação descreve?
+ambiental
+manutenção
+elétrica
+configuração
+R: ambiental
+
+8- Qual tipo de ameaça à rede destina-se a impedir que usuários autorizados acessem os recursos?
+ataques de acesso
+ataques de negação de serviço (DoS)
+ataques de reconhecimento
+exploração de confiança
+
+R: ataques de negação de serviço (DoS)
+
+
+9- Quais duas ações podem ser executadas para impedir o êxito de um ataque a rede em um servidor de contas de e-mail? (Escolha duas.)
+Nunca usar senhas que precisem da tecla Shift.
+Distribuir os servidores pelo prédio, colocando-os próximos das partes interessadas.
+Limitar o número de tentativas falhas de fazer login no servidor.
+Usar servidores de fornecedores diferentes.
+Nunca enviar a senha pela rede em texto simples.
+R: Nunca enviar a senha pela rede em texto simples.
+   Limitar o número de tentativas falhas de fazer login no servidor.
+
+
+10- Qual recurso do firewall é usado para assegurar que os pacotes recebidos em uma rede são respostas legítimas as requisições iniciadas pelos hosts internos?
+inspeção de pacotes stateful (SPI)
+filtragem de aplicações
+filtragem de pacotes
+filtragem de URLs
+
+R: inspeção de pacotes stateful (SPI)
+
+
+11- Qual é a finalidade da função de autenticação de segurança de rede?
+fornecer perguntas de desafio e de resposta
+exigir que os usuários provem quem são
+controlar as ações de um usuário
+determinar que recursos um usuário pode acessar
+
+R: exigir que os usuários provem quem são
+
+
+12- Um administrador de redes está executando o comando login block-for 180 attempts 2 within 30 em um roteador. Qual ameaça o administrador de redes está tentando prevenir?
+um dispositivo que está tentando inspecionar o tráfego em um link
+um indivíduo não identificado que está tentando acessar a sala de equipamentos de rede
+um usuário que está tentando descobrir uma senha para acessar o roteador
+um worm que está tentando acessar outra parte da rede
+R: um usuário que está tentando descobrir uma senha para acessar o roteador
+
+13- Qual é a finalidade de usar SSH para se conectar a um roteador?
+Permite uma conexão remota segura à interface de linha de comando do roteador.
+Permite configurar um roteador usando uma interface gráfica.
+Permite monitorar o roteador através de um aplicativo de gerenciamento de rede.
+Permite transferência segura da imagem de software IOS de uma estação de trabalho ou servidor inseguro.
+
+R: Permite uma conexão remota segura à interface de linha de comando do roteador.
+
+
+14- Quais são as duas etapas necessárias para que o SSH possa ser habilitado em um roteador da Cisco? (Escolha duas.)
+Criar um banner que será exibido aos usuários quando eles se conectarem.
+Gerar um conjunto de chaves secretas para serem usadas para criptografia e descriptografia.
+Dar um nome de host e um nome de domínio ao roteador.
+Disponibilizar SSH nas interfaces físicas em que as requisições de conexão serão recebidas.
+Configurar um servidor de autenticação para processar as requisições de conexão recebidas.
+
+R- Gerar um conjunto de chaves secretas para serem usadas para criptografia e descriptografia.
+     Dar um nome de host e um nome de domínio ao roteador.
+
+15 Considere a figura. A documentação de base para uma pequena empresa tinha estatísticas do tempo de ida e volta do ping de 36/97/132 entre os hosts H1 e H3. Hoje o administrador de redes verificou a conectividade efetuando um ping entre os hosts H1 e H3 que resultou em um tempo de ida e volta de 1458/2390/6066. O que isso indica para o administrador da rede?
+Algo está causando a interferência entre H1 e R1.
+O desempenho entre as redes está dentro dos parâmetros esperados.
+H3 não está devidamente conectado à rede.
+Algo está causando atrasos entre as redes.
+A conectividade entre H1 e H3 está boa.
+R: Algo está causando atrasos entre as redes
+
+16- Quando um administrador deve estabelecer uma base de rede?
+quando houver queda repentina no tráfego
+no ponto mais baixo do tráfego na rede
+em intervalos regulares durante um período de tempo
+quando o tráfego estiver em pico na rede
+
+R: em intervalos regulares durante um período de tempo
+
+17-  Considere a figura. Um administrador está tentando resolver problemas de conectividade entre o PC1 e o PC2 e usa o comando tracert do PC1 fazer isso. Com base na saída exibida, onde o administrador deve começar a solucionar o problema?
+R1
+PC2
+SW1
+R2
+SW2
+R: R1
+
+18- Quais informações sobre um roteador Cisco podem ser verificadas usando o comando show version ?
+o valor do registro da configuração
+o status operacional de interfaces seriais
+a distância administrativa usada para acessar as redes
+a versão do protocolo de roteamento ativada
+
+R: o valor do registro da configuração
+
+19- Qual afirmativa é verdadeira sobre o CDP em um dispositivo Cisco?
+Como é executado na camada de enlace de dados, o protocolo CDP pode ser implementado somente nos switches.
+O CDP pode ser desativado globalmente ou em uma interface específica.
+O comando show cdp neighbor detail revela o endereço IP de um vizinho apenas se houver conectividade da Camada 3.
+Para desativar o CDP globalmente, o comando no cdp enable no modo configuração de interface deve ser usado.
+
+R: O CDP pode ser desativado globalmente ou em uma interface específica
+
+
+20- Um administrador de redes de um campus pequeno utilizou o comando show ip interface brief em um switch. O que ele deseja verificar usando esse comando?
+o caminho usado para acessar um host específico em outra rede
+o status das interfaces do switch e o endereço configurado na interface vlan 1
+o gateway padrão usado pelo switch
+que um host específico em outra rede pode ser acessado
+
+R: o status das interfaces do switch e o endereço configurado na interface vlan 1
+
+
+21- Um técnico de rede executa o comando arp -d * em um computador depois que o roteador conectado à LAN é reconfigurado. Qual é o resultado da execução desse comando?
+São exibidas informações detalhadas da cache ARP.
+O atual conteúdo da cache ARP é exibido.
+A cache ARP é sincronizada com a interface do roteador.
+A cache ARP é apagada.
+R: A cache ARP é apagada
+
+22- Um técnico de rede executa o comando C:\> tracert -6 www.cisco.com em um computador Windows. Qual é a finalidade da opção de comando -6?
+Define um limite de tempo de 6 milissegundos para cada repetição.
+Limita o rastreamento a apenas 6 saltos.
+Envia 6 sondas a cada período de tempo TTL.
+Força o rastreamento a usar o IPv6.
+
+R: Força o rastreamento a usar o IPv6
+
+23- Qual comando deve ser usado em um roteador ou Cisco switch para permitir que as mensagens de log sejam exibidas nas sessões conectadas remotamente usando Telnet ou SSH?
+debug all
+logging synchronous
+terminal monitor
+show running-config?
+
+R: terminal monitor
+
+
+23- Qual comando deve ser usado em um roteador ou Cisco switch para permitir que as mensagens de log sejam exibidas nas sessões conectadas remotamente usando Telnet ou SSH?
+debug all
+logging synchronous
+terminal monitor
+show running-config?
+
+R: 1- perda de dados
+     2- roubo de identidade
+     3- interrupção de serviço
+     4- roubo de informações
+     5- ( em branco )
+
+ 
