@@ -1,0 +1,146 @@
+Exame Preliminar
+
+1)
+11100111
+
+2)
+BA
+
+3)
+12
+
+4)
+400 reais
+
+5)
+disco rigido
+disco blu-ray
+
+6)
+160
+
+7)
+executa um teste de componentes internos quando é iniciado
+
+8)
+Ela não é controlada de forma central.
+
+9)
+ping
+
+10)
+12 horas
+
+11)
+CAPACIDADE MAIOR 	- DISCO RIGIDO	
+2 CAPACIDADE MAIOR 	- DVD
+3 CAPACIDADE MAIOR  	- CD 
+A CAPACIDADE MENOR	- DISCO FLEXIVEL
+
+12)
+A - PS2
+B - SPDIF
+C - USB
+D - IEEE 1394
+E - HDMI
+F - DISPLAY PORT
+
+13)
+Gerenciador de tarefas
+word
+explorer
+adobe
+entrada
+
+14)
+midias sociais
+wiki
+podcast
+mensagem instantanea
+
+15)
+Quick Time
+MPEG
+JPEG
+GIF
+
+16)
+há um problema com o DNS
+
+17)
+2001: 0db8: 3c55: 0015 :: abcd: ff13
+
+18)
+selecionar os caminhos que são usados ​​para direcionar o tráfego para redes de destino
+
+19)
+roteador
+
+20)
+DSL
+
+21)
+WAN
+
+22)
+para identificar onde o pacote foi perdido ou atrasado
+
+23)
+ip da interface do roteador 1 que conecta a lan do PC1 ao Roteador 1
+
+24)
+192.168.1.64/26
+
+25)
+a pilha TCP/IP
+
+26)
+fornecer feedback
+
+27)
+unidade de dados do protocolo
+
+28)
+numeros de porta de origem e destino
+
+29)
+DNS
+
+30)
+comando inserido no modo de operação errado
+
+31)
+TCP
+
+32)
+camada fisica
+
+33)
+tamanho diferente dependendo dos requisitos
+
+34)
+DCHP
+
+35)
+descartar o quadro
+
+36)
+conexao SSH
+
+37)
+10.0.0.8/8
+192.168.0.0/16
+172.16.0.0/12
+
+38)
+descobrir MAC de qualquer host de rede diferente
+
+39)
+garantir que todos os tipos de dados sejao tratados da mesma maneira
+
+40)
+172.17.6.15
+172.17.14.8
+172.17.12.10
+172.17.10.5
+172.17.8.20
