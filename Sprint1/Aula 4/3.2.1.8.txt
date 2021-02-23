@@ -1,0 +1,47 @@
+	R1
+enable
+configure terminal
+ip route 0.0.0.0 0.0.0.0 serial 0/0/1
+router rip
+version 2
+no auto-summary
+default-information originate
+network 192.168.2.0
+network 192.168.1.0
+passive-interface gi 0/0
+do write
+
+
+	R2
+enable
+configure terminal
+router rip
+version 2
+no auto-summary
+network 192.168.2.0
+network 192.168.3.0
+network 192.168.4.0
+passive-interface gi 0/0
+do write
+
+
+
+	R3
+enable
+configure terminal
+router rip
+version 2
+no auto-summary
+network 192.168.4.0
+network 192.168.5.0
+passive-interface gi 0/0
+do write
+
+
+
+
+
+
+
+
+
