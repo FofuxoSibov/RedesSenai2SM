@@ -1,0 +1,82 @@
+	S1
+en
+conf t
+int g0/1
+switchport mode dynamic desirable
+exit
+int g0/2
+switchport mode trunk
+exit
+int range g0/1-2
+switchport trunk native vlan 999
+exit
+vtp mode server
+vtp domain CCNA
+vtp password cisco
+vlan 10
+name Red
+vlan 20
+name Blue
+vlan 30
+name Yellow
+exit
+
+
+
+	S2
+en
+conf t
+int g0/1
+switchport mode dynamic desirable
+exit
+
+int g0/1
+switchport trunk native vlan 999
+exit
+
+
+vtp mode client
+vtp domain CCNA
+vtp password cisco
+
+int range f0/1-8
+switchport mode access
+switchport access vlan 10
+exit
+int range f0/9-16
+switchport mode access
+switchport access vlan 20
+exit
+interface range f0/17-24
+switchport mode access
+switchport access vlan 30
+exit
+
+	S3
+en
+conf t
+int g0/2
+switchport mode trunk
+exit
+int g0/2
+switchport trunk native vlan 999
+exit
+vtp mode transparent
+vtp domain CCNA
+vtp password cisco
+vtp mode client
+
+int range f0/1-8
+switchport mode access
+switchport access vlan 10
+exit
+int range f0/9-16
+switchport mode access
+switchport access vlan 20
+exit
+interface range f0/17-24
+switchport mode access
+switchport access vlan 30
+exit
+
+vtp mode transparent

@@ -1,0 +1,49 @@
+Verificar IPs dos PCs
+Troca o GW do PC3
+
+	S1
+Verificar VLAN e comparar com as Interfaces
+show vlan brief 
+
+show run verifique a Gig0/1 esta como Access
+interface GigabitEthernet0/1
+ switchport mode access
+
+Trocar:
+en
+conf t
+int g0/1
+switchport mode trunk
+
+	R1
+Verificar IPs e Portas
+show ip interface brief
+Veja que esta Down a porta virtual
+
+en
+conf t
+int g0/1.10
+no shutdown
+
+show run verifique os encapsulamento estão invertidas
+
+interface GigabitEthernet0/1.10
+ encapsulation dot1Q 30
+ ip address 172.17.10.1 255.255.255.0
+!
+interface GigabitEthernet0/1.30
+ encapsulation dot1Q 10
+ ip address 172.17.30.1 255.255.255.0
+!
+
+en
+conf t
+int g0/1.10
+no encapsulation dot1Q
+encapsulation dot1Q 10
+ip address 172.17.10.1 255.255.255.0
+
+int g0/1.30
+no encapsulation dot1Q
+encapsulation dot1Q 30
+ip address 172.17.30.1 255.255.255.0
