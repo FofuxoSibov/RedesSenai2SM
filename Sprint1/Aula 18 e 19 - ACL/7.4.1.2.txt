@@ -1,0 +1,54 @@
+R Filial(Branch)
+
+en
+conf t
+int g0/0
+ip address 172.16.159.254 255.255.240.0
+no shutdown
+exit
+int g0/1
+ip address 172.16.143.254 255.255.240.0
+no shutdown
+exit
+
+router rip
+version 2
+passive-interface gi0/0
+passive-interface gi0/1
+network 172.16.128.0
+network 172.16.144.0
+network 192.168.0.0
+no auto-summary
+exit
+ip access-list standard BranchServer
+deny 172.16.64.0 0.0.63.255
+permit any
+exit
+interface gi 0/1
+ip access-group BranchServer out
+
+
+R Sede (HQ)
+en
+conf t
+router rip
+version 2
+passive-interface gi0/0
+passive-interface gi0/1
+passive-interface serial 0/0/1
+network 172.16.0.0
+network 172.16.64.0
+network 192.168.0.0
+no auto-summary
+exit
+ip route 0.0.0.0 0.0.0.0 serial 0/0/1
+router rip
+default-information originate
+exit
+ip access-list standard HQServer
+deny 172.16.144.0 0.0.15.255
+permit any
+interface gigabitEthernet 0/1
+ip access-group HQServer out
+
+Preencher IP do B1 de acordo com a tabela

@@ -1,0 +1,31 @@
+show run
+ip access-list standard FROM_192
+ deny 192.168.0.0 0.0.0.255
+ permit any
+ip access-list standard FROM_10
+ deny host 10.0.0.22
+ permit any
+ip access-list standard FROM_172
+ deny host 172.16.0.2
+ permit any
+Estão aplicadas
+interface GigabitEthernet0/0
+ ip access-group FROM_10 in
+
+interface GigabitEthernet0/1
+ ip access-group FROM_172 in
+
+Teste de ping do L2 para o Servidor 1 - 172.16.255.254
+
+R1
+
+enable
+conf t
+interface gigabitEthernet 0/0
+ip access-group FROM_192 out
+
+ip access-list standard FROM_10
+no deny host 10.0.0.22
+5 deny host 10.0.0.2
+
+
