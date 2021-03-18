@@ -1,0 +1,71 @@
+Router HQ
+
+en
+conf t
+hostname HQ
+ipv6 unicast-routing
+no ip domain-lookup
+int s0/0/0
+descri For Primary Lan
+ip add 128.107.0.1 255.255.255.252
+ipv add 2001:DB8:2:1::1/64
+ipv add FE80::1 link-local
+no sh
+exit
+int s0/0/1
+descri For Primary Lan
+ip add 128.107.0.5 255.255.255.252
+ipv add 2001:DB8:3:1::1/64
+ipv add FE80::1 link-local
+no sh
+exit
+int s0/1/1
+descri For Router
+ip add 10.10.20.1 255.255.255.252
+ipv add 2001:DB8:1:1::1/64
+ipv add FE80::1 link-local
+no sh
+exit
+enable secret cisco
+line console 0
+password class
+login
+exit
+line vty 0 15
+password class
+login
+exit
+service pass
+banner motd " Voce nao pode acessar! "
+ip route 10.10.2.0 255.255.255.0 s0/1/1
+ip route 10.10.1.0 255.255.255.0 s0/1/1
+ipv6 route 2001:DB8:1:B::/64 s0/1/1
+ipv6 route 2001:DB8:1:A::/64 s0/1/1
+ip route 0.0.0.0 0.0.0.0 s0/0/0
+ip route 0.0.0.0 0.0.0.0 s0/0/1 2
+
+!Router Branch
+
+en
+conf t
+ipv6 unicast-routing
+int s0/0/0
+ip add 10.10.20.2 255.255.255.252
+ipv add 2001:DB8:1:1::2/64
+ipv add FE80::2 link-local
+no sh
+exit
+int g0/0
+ip add 10.10.1.254 255.255.255.0
+ipv add 2001:DB8:1:A::1/64
+ipv add FE80::2 link-local
+no sh
+exit
+int g0/1
+ip add 10.10.2.254 255.255.255.0
+ipv add 2001:DB8:1:B::1/64
+ipv add FE80::2 link-local
+no sh
+exit
+ip route 0.0.0.0 0.0.0.0 s0/0/0
+ipv6 route ::/0 s0/0/0
