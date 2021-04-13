@@ -1,0 +1,58 @@
+	ACME-RT
+en
+conf t
+int serial 0/0/0
+ip nat outside
+int range gi 0/0-2
+ip nat inside
+
+!Resposta para o 1° Problema NAT Dinâmico
+
+!ACL
+ip access-list standard LAN_AMB1
+permit 192.168.0.0 0.0.0.255
+
+!Criar NAT Pool 
+ip nat pool Intervalo-IPs-WAN 200.0.0.101 200.0.0.110 netmask 255.255.255.0
+
+!Criação NAT Dinamico
+ip nat inside source list LAN_AMB1 pool Intervalo-IPs-WAN
+
+!Ver Traduções
+show ip nat translations
+
+
+Resposta para o 2° Problema PAT
+
+!Criar Pool com Unico Endereço
+ip nat pool IP-WAN-PAT 200.0.0.1 200.0.0.1 netmask 255.255.255.0
+
+!ACL
+ip access-list standard PAT_AMB2
+permit 192.168.1.0 0.0.0.255
+
+
+!PAT aplicado ao IP que esta na Interface 
+ip nat inside source list PAT_AMB2 interface Serial 0/0/0 orverload
+
+!PAT aplicado ao IP que esta na Interface
+ip nat inside source list PAT_AMB2 pool IP-WN-PAT overload 
+
+
+
+
+!Resposta para o 3° Problema NAT Static
+ip nat inside source static 192.168.2.100 200.0.0.3
+
+
+!Redirecionamento de portas 1 para 1 - Não funcionando (Servidor Virtual)
+ip nat inside source static 192.168.2.100 80 200.0.0.3 8080
+
+
+Limpar tabela de NAT
+#clear ip nat translation *
+Vejamos que o STATIC sempre esta lá fixo
+
+
+
+
