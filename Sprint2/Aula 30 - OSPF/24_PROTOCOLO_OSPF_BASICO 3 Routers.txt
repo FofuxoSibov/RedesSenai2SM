@@ -1,0 +1,83 @@
+	R_MATRIZ
+en
+confi t
+hostname R_MATRIZ
+int g0/0/0
+ip add 192.168.0.126 255.255.255.128
+no shut
+int s0/1/0
+ip add 10.0.0.13 255.255.255.252
+clock rate 2000000
+no shut 
+int s0/1/1
+ip add 10.0.0.9 255.255.255.252
+clock rate 2000000
+no shut 
+router OSPF 20 
+network 10.0.0.12 0.0.0.3 area 0
+network 10.0.0.8 0.0.0.3 area 0
+network 192.168.0.0 0.0.0.127 area 0
+exit
+do write
+
+PC0 	IP 192.168.0.1
+	MK 255.255.255.128
+	GW 192.168.0.126
+
+	R_FILIAL1
+en
+conf t
+hostname R_FILIAL1
+int g0/0/0
+ip add 192.168.0.158 255.255.255.224
+no shut
+int s0/1/0
+ip add 10.0.0.14 255.255.255.252
+clock rate 2000000
+no shut 
+int s0/1/1
+ip add 10.0.0.6 255.255.255.252
+clock rate 2000000
+no shut 
+
+router OSPF 20 
+network 10.0.0.12 0.0.0.3 area 0
+network 10.0.0.4 0.0.0.3 area 0
+network 192.168.0.128 0.0.0.31 area 0
+exit
+do write
+
+PC1 	IP 192.168.0.129
+	MK 255.255.255.224
+	GW 192.168.0.158
+
+
+	R_FILIAL2
+en
+conf t
+hostname R_FILIAL2
+int g0/0/0
+ip add 192.168.0.174 255.255.255.240
+no shut
+int s0/1/0
+ip add 10.0.0.10 255.255.255.252
+clock rate 2000000
+no shut 
+int s0/1/1
+ip add 10.0.0.5 255.255.255.252
+clock rate 2000000
+no shut 
+
+router OSPF 20
+network 10.0.0.4 0.0.0.3 area 0
+network 10.0.0.8 0.0.0.3 area 0
+network 192.168.0.160 0.0.0.15 area 0
+exit
+do write
+
+PC2 	IP 192.168.0.161
+	MK 255.255.255.240
+	GW 192.168.0.174
+
+Ver as Redes e Rotas do OSPF
+#show ip route ospf
