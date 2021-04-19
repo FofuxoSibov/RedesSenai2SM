@@ -1,0 +1,39 @@
+en
+conf t
+hostname R_MASTRIZ
+int gi 0/0/0
+ip add 192.168.0.254 255.255.255.0
+no shut
+int se 0/1/0
+ip add 10.0.0.13 255.255.255.252
+clock rate 2000000
+no shut
+
+!Conf do OSPF
+router ospf 20
+network 192.168.0.0 0.0.0.255 area 0
+network 10.0.0.12 0.0.0.3 area 0
+exit
+
+en
+conf t
+hostname R_FILIAL
+int gi 0/0/0
+ip add 172.16.255.254 255.255.0.0
+no shut
+int se 0/1/0
+ip add 10.0.0.14 255.255.255.252
+clock rate 2000000
+no shut
+
+!Conf do OSPF
+router ospf 20
+network 10.0.0.12 0.0.0.3 area 0
+network 172.16.0.0 0.0.255.255 area 0
+exit
+
+Ver todas as Redes e Rotas
+#show ip route
+
+Ver as Redes e Rotas do OSPF
+#show ip route ospf
