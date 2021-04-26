@@ -1,0 +1,185 @@
+29_EXERCÍCIO_DE_OSPF_MULTIAREA
+
+enable
+configure terminal
+hostname R_JUQ
+service password-encryption
+no ip domain lookup 
+enable secret senai@132
+line console 0
+logging synchronous
+password senai@132
+login
+line vty 0 4
+logging synchronous
+password senai@132
+login
+interface gigabitethernet 0/0/0
+ip address 10.3.247.254 255.255.248.0
+no shutdown
+interface serial 0/1/0
+ip address 10.3.204.65 255.255.255.252
+clock rate 2000000
+no shutdown
+router OSPF 80
+passive-interface gigabitEthernet 0/0/0
+network 10.3.240.0 0.0.7.255 area 4
+network 10.3.204.64 0.0.0.3 area 0
+end
+copy running-config startup-config
+
+
+enable
+configure terminal
+hostname R_SANTOS
+service password-encryption
+no ip domain lookup 
+enable secret senai@132
+line console 0
+logging synchronous
+password senai@132
+login
+line vty 0 4
+logging synchronous
+password senai@132
+login
+interface gigabitethernet 0/0/0
+ip address 10.3.251.254 255.255.252.0
+no shutdown
+interface serial 0/1/1
+ip address 10.3.204.85 255.255.255.252
+no shutdown
+router OSPF 20
+passive-interface gigabitEthernet 0/0/0
+network 10.3.248.0 0.0.3.255 area 8
+network 10.3.204.84 0.0.0.3 area 8
+end
+copy running-config startup-config
+
+
+enable
+configure terminal
+hostname R_ITA
+service password-encryption
+no ip domain lookup 
+enable secret senai@132
+line console 0
+logging synchronous
+password senai@132
+login
+line vty 0 4
+logging synchronous
+password senai@132
+login
+interface gigabitethernet 0/0/0
+ip address 10.3.127.254 255.255.128.0
+no shutdown
+interface serial 0/1/1
+ip address 10.3.204.86 255.255.255.252
+no shutdown
+interface serial 0/1/0
+ip address 10.3.204.78 255.255.255.252
+clock rate 2000000
+no shutdown
+router OSPF 30
+passive-interface gigabitEthernet 0/0/0
+network 10.3.0.0 0.0.127.255 area 9
+network 10.3.204.84 0.0.0.3 area 8
+network 10.3.204.76 0.0.0.3 area 0
+end
+copy running-config startup-config
+
+
+enable
+configure terminal
+hostname R_PAR
+service password-encryption
+no ip domain lookup 
+enable secret senai@132
+line console 0
+logging synchronous
+password senai@132
+login
+line vty 0 4
+logging synchronous
+password senai@132
+login
+interface gigabitethernet 0/0/0
+ip address 10.3.254.62 255.255.255.192
+no shutdown
+interface serial 0/1/1
+ip address 10.3.204.89 255.255.255.252
+no shutdown
+interface serial 0/1/0
+ip address 10.3.204.74 255.255.255.252
+no shutdown
+router OSPF 40
+passive-interface gigabitEthernet 0/0/0
+network 10.3.254.0 0.0.0.63 area 11
+network 10.3.204.72 0.0.0.3 area 0
+network 10.3.204.88 0.0.0.3 area 10
+end
+copy running-config startup-config
+
+
+enable
+configure terminal
+hostname R_SC
+service password-encryption
+no ip domain lookup 
+enable secret senai@132
+line console 0
+logging synchronous
+password senai@132
+login
+line vty 0 4
+logging synchronous
+password senai@132
+login
+interface gigabitethernet 0/0/0
+ip address 10.2.255.254 255.255.0.0
+no shutdown
+interface serial 0/1/1
+ip address 10.3.204.90 255.255.255.252
+clock rate 2000000
+no shutdown
+router OSPF 50
+passive-interface gigabitEthernet 0/0/0
+network 10.2.0.0 0.0.255.255 area 10
+network 10.3.204.88 0.0.0.3 area 10
+end
+copy running-config startup-config
+
+
+enable
+configure terminal
+hostname R_CENTRAL
+service password-encryption
+no ip domain lookup 
+enable secret senai@132
+line console 0
+logging synchronous
+password senai@132
+login
+line vty 0 4
+logging synchronous
+password senai@132
+login
+interface serial 0/1/0
+ip address 10.3.204.66 255.255.255.252
+no shutdown
+interface serial 0/2/0
+no shutdown
+ip address 10.3.204.73 255.255.255.252
+no shutdown
+interface serial 0/2/1
+ip address 10.3.204.77 255.255.255.252
+no shutdown
+router OSPF 90
+passive-interface gigabitEthernet 0/0/0
+network 10.3.204.64 0.0.0.3 area 0
+network 10.3.204.72 0.0.0.3 area 0
+network 10.3.204.76 0.0.0.3 area 0
+end
+copy running-config startup-config
+
