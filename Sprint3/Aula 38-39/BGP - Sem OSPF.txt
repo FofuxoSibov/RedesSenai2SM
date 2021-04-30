@@ -1,0 +1,40 @@
+	R1
+en
+conf t
+hostname R1
+int g0/1
+ip add 192.168.1.1 255.255.255.0
+no shut
+int g0/0
+ip add 200.1.2.1 255.255.255.252
+no shut
+exit
+
+!Informar o ID do AS
+router bgp 65001
+!Cadastrar sua rede
+network 192.168.1.0 mask 255.255.255.0
+!Declarar o AS e o IP do Amiguinho do lado
+neighbor 200.1.2.2 remote-as 65002
+
+exit
+
+	R2
+en
+conf t
+hostname R2
+int g0/1
+ip add 192.168.2.1 255.255.255.0
+no shut
+int g0/0
+ip add 200.1.2.2 255.255.255.252
+no shut
+exit
+
+router bgp 65002
+neighbor 200.1.2.1 remote-as 65001
+network 192.168.2.0 mask 255.255.255.0
+exit
+
+
+show ip bgp
