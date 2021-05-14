@@ -1,0 +1,173 @@
+Conf PC1 e PC3 como DHCP
+(ambos errados APIPA)
+
+	BRANCH
+!Conf do IPs
+en
+conf t
+int g0/0
+ip add 192.168.10.1 255.255.255.0
+no shutdown
+int serial 0/0/0
+ip add 209.165.201.22 255.255.255.252
+no shutdown
+exit
+
+!Conf Basica
+ip domain-name CISCO.com
+username admin password secureacess
+crypto key generate rsa
+2048
+ip ssh version 2
+ip ssh authentication-retries 2
+ip ssh time-out 60
+line vty 0 15
+transport input ssh
+login local
+exit
+
+username admin password secureaccess
+
+!Conf DHCP
+ip dhcp excluded-address 192.168.10.1 192.168.10.5
+ip dhcp pool LAN
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 192.168.30.250
+exit
+
+
+!Conf PPP
+interface serial 0/0/0
+encapsulation ppp
+ppp authentication chap
+exit
+username ISP-3 password cisco
+
+
+!BGP
+router bgp 65010
+neighbor 209.165.201.21 remote-as 65535
+network 192.168.10.0 mask 255.255.255.0
+exit
+
+
+	HQ
+
+!Conf do IPs
+en
+conf t
+int tunnel 10
+ip address 10.1.1.2 255.255.255.252
+exit
+int g0/0
+ip add 192.168.30.1 255.255.255.0
+no shutdown
+int serial 0/0/0
+ip add 209.165.201.18 255.255.255.252
+no shutdown
+exit
+
+!Conf Basica
+ip domain-name CISCO.com
+username admin password secureacess
+crypto key generate rsa
+2048
+ip ssh version 2
+ip ssh authentication-retries 2
+ip ssh time-out 60
+line vty 0 15
+transport input ssh
+login local
+exit
+
+username admin password secureaccess
+
+!Conf DHCP
+ip dhcp excluded-address 192.168.30.1 192.168.30.10
+ip dhcp pool LAN
+network 192.168.30.0 255.255.255.0
+default-router 192.168.30.1
+dns-server 192.168.30.250
+exit
+
+!Conf PPP
+interface serial 0/0/0
+encapsulation ppp
+ppp authentication chap
+exit
+username ISP-2 password cisco
+
+!BGP
+router bgp 65020
+neighbor 209.165.201.17 remote-as 65535
+network 192.168.30.0 mask 255.255.255.0
+exit
+
+
+!Tunel GRE com REMOTO
+int tunnel 10
+tunnel mode gre ip
+tunnel destination 209.165.201.2 
+tunnel source serial 0/0/0
+no shutdown
+exit
+
+
+!Conf OSPF
+router ospf 100
+network 192.168.30.0 0.0.0.255 area 0
+network 10.1.1.0 0.0.0.3 area 0
+passive-interface gigabitEthernet 0/0
+exit
+
+	REMOTO
+
+!Conf do IPs
+en
+conf t
+int tunnel 10
+ip address 10.1.1.1 255.255.255.252
+exit
+int g0/0
+ip add 192.168.20.1 255.255.255.0
+no shutdown
+int serial 0/0/0
+ip add 209.165.201.2 255.255.255.252
+no shutdown
+exit
+
+!Conf Basica
+ip domain-name CISCO.com
+username admin password secureacess
+crypto key generate rsa
+2048
+ip ssh version 2
+ip ssh authentication-retries 2
+ip ssh time-out 60
+line vty 0 15
+transport input ssh
+login local
+exit
+
+username admin password secureaccess
+
+!Rota Estatica
+ip route 0.0.0.0 0.0.0.0 209.165.201.1
+
+!Tunel GRE para HQ
+int tunnel 10
+tunnel mode gre ip
+tunnel destination 209.165.201.18 
+tunnel source serial 0/0/0
+exit
+
+!Conf OSPF
+router ospf 100
+network 192.168.20.0 0.0.0.255 area 0
+network 10.1.1.0 0.0.0.3 area 0
+passive-interface gigabitEthernet 0/0
+exit
+
+
+Verificar DNS com nslookup

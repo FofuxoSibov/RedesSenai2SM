@@ -1,0 +1,65 @@
+	R1
+en
+conf t
+interface s0/0/0
+encapsulation ppp
+exit
+username R3 secret class
+interface s0/0/0
+ppp authentication pap
+ppp pap sent-username R1 password cisco
+exit
+
+
+	R3
+en
+conf t
+interface s0/0/0
+encapsulation ppp
+interface s0/0/1
+encapsulation ppp
+interface s0/1/0
+encapsulation ppp
+exit
+username R1 secret class
+interface s0/0/0
+ppp authentication pap
+ppp pap sent-username R3 password class
+exit
+
+username R2 secret cisco
+interface s0/0/1
+ppp authentication pap
+ppp pap sent-username R3 password class
+exit
+
+username ISP secret cisco
+interface serial0/1/0
+ppp authentication chap
+exit
+
+
+	R2
+en
+conf t
+interface s0/0/1
+encapsulation ppp
+exit
+
+username R3 secret class
+interface s0/0/1
+ppp authentication pap
+ppp pap sent-username R2 password cisco
+exit
+
+	ISP
+en
+conf t
+interface s0/0/0
+encapsulation ppp
+exit
+hostname ISP
+username R3 secret cisco
+interface s0/0/0
+ppp authentication chap
+exit

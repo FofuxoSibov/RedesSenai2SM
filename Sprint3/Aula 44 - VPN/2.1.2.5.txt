@@ -1,0 +1,61 @@
+Verificar cabo serial deixando todos DCE
+show controllers serial 0/1/1
+
+A interface serial serial 0/1/1 esta como DTE
+Mudar para DCE, remove o cabo e coloca o cabo certo.
+
+Telcom Serial - S0/0/1 - R2 - S0/0/1 - está errado 
+inverter
+
+R3
+en
+conf t
+interface serial 0/0/0
+no shutdown
+
+Telco
+show run
+interface Serial0/0/0
+ ip address 64.100.34.17 255.255.255.252
+ clock rate 2000000
+!
+interface Serial0/0/1
+ ip address 64.100.34.21 255.255.255.252
+!
+interface Serial0/1/0
+ ip address 64.100.34.25 255.255.255.252
+ clock rate 4000000
+!
+interface Serial0/1/1
+ ip address 64.100.34.29 255.255.255.252
+ clock rate 2000000
+
+conf t
+interface Serial0/0/0
+clock rate 4000000
+interface Serial0/0/1
+clock rate 4000000
+end
+
+
+Verificar em todos os roteadores encapsulamento
+
+	R3
+show interfaces serial 0/0/1
+
+	R4
+en
+conf t
+interface Serial0/0/1
+encapsulation hdlc
+
+
+Telco - Esta OK
+show ip interface brief
+
+	R1
+en
+conf t
+interface serial 0/0/0
+ip address 64.100.34.18 255.255.255.252
+

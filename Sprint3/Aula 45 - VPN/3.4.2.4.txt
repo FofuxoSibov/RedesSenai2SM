@@ -1,0 +1,29 @@
+Pingar dentro de RB o RA - 64.103.211.2
+Está funcionando
+
+PCA para PCB não funcionam
+
+	RA
+en
+conf t
+interface tunnel 0
+ip address 10.10.10.1 255.255.255.252
+tunnel source s0/0/0
+tunnel destination 209.165.122.2
+tunnel mode gre ip
+no shutdown
+exit
+ip route 192.168.2.0 255.255.255.0 10.10.10.2
+
+
+	RB
+en
+conf t
+interface tunnel 0
+ip address 10.10.10.2 255.255.255.252
+tunnel source s0/0/0
+tunnel destination 64.103.211.2
+tunnel mode gre ip
+no shutdown
+exit
+ip route 192.168.1.0 255.255.255.0 10.10.10.1
