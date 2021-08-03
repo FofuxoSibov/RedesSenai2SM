@@ -1,0 +1,51 @@
+RSP
+en
+conf t
+int g0/0/0
+ip add 192.168.10.254 255.255.255.0
+no shut
+int s0/1/0
+clock rate 4000000
+ip add 10.0.0.1 255.255.255.252
+no shut
+!Conf RIP SP
+router rip
+version 2
+network 192.168.10.0
+network 10.0.0.0
+no auto-summary
+
+RINT
+en
+conf t
+int s0/1/1
+ip add 10.0.0.2 255.255.255.252
+no shut
+int s0/1/0
+ip add 10.0.0.5 255.255.255.252
+no shut
+
+!Conf RIP INT
+router rip
+version 2
+network 10.0.0.0
+network 10.0.0.4
+no auto-summary
+
+RRJ
+en
+conf t
+int g0/0/0
+ip add 172.16.255.254 255.255.0.0
+no shut
+int s0/1/0
+clock rate 4000000
+ip add 10.0.0.6 255.255.255.252
+no shut
+
+!Conf RIP RJ
+router rip
+version 2
+network 10.0.0.4
+network 172.16.0.0
+no auto-summary
