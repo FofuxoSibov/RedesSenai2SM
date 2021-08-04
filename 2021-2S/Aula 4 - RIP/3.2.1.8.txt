@@ -1,0 +1,60 @@
+	R1
+
+en
+conf t
+!Conf Rota Padrão
+ip route 0.0.0.0 0.0.0.0 s0/0/1
+!Conf RIP
+router rip
+version 2
+no auto-summary
+network 192.168.1.0
+network 192.168.2.0
+!Conf Desativar busca de RIP 
+passive-interface gig 0/0
+!Conf Propagar Rota Padrão
+default-information originate
+do wr
+
+	R2
+en
+conf t
+!Conf RIP
+router rip
+version 2
+no auto-summary
+network 192.168.2.0
+network 192.168.3.0
+network 192.168.4.0
+passive-interface gig 0/0
+do wr
+
+	R3
+en
+conf t
+router rip
+version 2
+no auto-summary
+network 192.168.4.0
+network 192.168.5.0
+passive-interface gig 0/0
+do wr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
