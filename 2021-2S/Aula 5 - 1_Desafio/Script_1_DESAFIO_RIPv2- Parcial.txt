@@ -1,0 +1,124 @@
+	RT JUQ
+en
+conf t
+
+!Conf nome
+hostname rt-juq
+!Conf Criptografia de Senha
+service password-encryption
+!Conf Banner
+banner motd & Somente pessoal do TI do Senai <nome da cidade> Autorizado !! &
+
+!Conf Senha do console
+line console 0
+password Senai@132
+login
+!Conf Senha para VTY também
+logging synchronous
+exit
+
+!Conf Senha da Enable
+enable secret Senai@132
+
+
+!Conf Senha do VTY
+line vty 0 4
+password Senai@132
+exit
+
+!Conf Interface Loopback de Gerencia
+int loopback 0
+ip add 10.0.1.2 255.255.255.0
+no shut
+
+!Conf Interfaces
+int g0/0/0
+ip add 192.168.40.254 255.255.255.0
+no shut
+int s 0/1/0
+ip add 10.0.0.6 255.255.255.252
+no shut
+
+int s 0/1/1
+ip add 10.0.0.13 255.255.255.252
+clock rate 4000000
+no shut
+exit
+
+
+!Conf RIP
+router rip
+version 2
+no auto-summary
+network 192.168.40.0
+network 10.0.0.4
+network 10.0.0.12
+passive-interface g0/0/0
+exit
+
+!Salvar Conf Geral
+do wr
+
+	RT SP
+en
+conf t
+
+!Conf nome
+hostname rt-sao
+!Conf Criptografia de Senha
+service password-encryption
+!Conf Banner
+banner motd & Somente pessoal do TI do Senai <nome da cidade> Autorizado !! &
+
+!Conf Senha do console
+line console 0
+password Senai@132
+login
+!Conf Senha para VTY também
+logging synchronous
+exit
+
+!Conf Senha da Enable
+enable secret Senai@132
+
+
+!Conf Senha do VTY
+line vty 0 4
+password Senai@132
+exit
+
+!Conf Interface Loopback de Gerencia
+int loopback 0
+ip add 10.0.1.1 255.255.255.0
+no shut
+
+!Conf Interfaces
+int g0/0/0
+ip add 192.168.50.190 255.255.255.224
+no shut
+int s 0/1/0
+ip add 10.0.0.5 255.255.255.252
+clock rate 4000000
+no shut
+
+int s 0/1/1
+ip add 10.0.0.17 255.255.255.252
+clock rate 4000000
+no shut
+
+!Conf RIP
+router rip
+version 2
+no auto-summary
+network 192.168.50.0
+network 10.0.0.4
+network 10.0.0.16
+passive-interface g0/0/0
+exit
+
+!Salvar Conf Geral
+do wr
+
+
+
+
