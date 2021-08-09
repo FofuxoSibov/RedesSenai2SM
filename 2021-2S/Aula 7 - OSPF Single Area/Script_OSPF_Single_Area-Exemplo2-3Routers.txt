@@ -1,0 +1,100 @@
+	R_Matriz
+
+en
+conf t
+hostname Matriz
+!Conf das Interfaces
+int g0/0/0
+ip add 192.168.0.126 255.255.255.128
+no shut
+int se0/1/0
+ip add 10.0.0.13 255.255.255.252
+!Velocidade de 4Mb
+clock rate 4000000
+no shut
+int se0/1/1
+ip add 10.0.0.9 255.255.255.252
+!Velocidade de 8Mb
+clock rate 8000000
+no shut
+exit
+
+!Conf do OSPF com ID de Processo 20
+router ospf 20
+!Conf do ID do Roteador fixo como 1.1.1.1
+router-id 1.1.1.1
+!Conf de declarar rede com Wildcard (Mascara invertida)
+network 192.168.0.0 0.0.0.127 area 0
+network 10.0.0.12 0.0.0.3 area 0
+network 10.0.0.8 0.0.0.3 area 0
+!Não gastar processamento e memoria com a interface Giga 0/0/0 
+passive-interface g 0/0/0
+exit
+do wr
+
+
+	R_Filial1
+
+en
+conf t
+hostname Filial1
+!Conf das Interfaces
+int g0/0/0
+ip add 192.168.0.158 255.255.255.224
+no shut
+int se0/1/0
+ip add 10.0.0.14 255.255.255.252
+!Velocidade de 4Mb foi conf da Matriz
+no shut
+int se0/1/1
+ip add 10.0.0.6 255.255.255.252
+!Velocidade de 8Mb foi conf na Filial2
+no shut
+exit
+
+!Conf do OSPF com ID de Processo 20
+router ospf 20
+!Conf do ID do Roteador fixo como 2.2.2.2
+router-id 2.2.2.2
+!Conf de declarar rede com Wildcard (Mascara invertida)
+network 192.168.0.128 0.0.0.31 area 0
+network 10.0.0.12 0.0.0.3 area 0
+network 10.0.0.4 0.0.0.3 area 0
+!Não gastar processamento e memoria com a interface Giga 0/0/0 
+passive-interface g 0/0/0
+exit
+do wr
+
+
+	R_Filial2
+
+en
+conf t
+hostname Filial2
+!Conf das Interfaces
+int g0/0/0
+ip add 192.168.0.174 255.255.255.240
+no shut
+int se0/1/1
+ip add 10.0.0.5 255.255.255.252
+!Velocidade de 8Mb
+clock rate 8000000
+no shut
+int se0/1/0
+ip add 10.0.0.10 255.255.255.252
+!Velocidade de 8Mb foi conf na Matriz
+no shut
+exit
+
+!Conf do OSPF com ID de Processo 20
+router ospf 20
+!Conf do ID do Roteador fixo como 3.3.3.3
+router-id 3.3.3.3
+!Conf de declarar rede com Wildcard (Mascara invertida)
+network 192.168.0.160 0.0.0.15 area 0
+network 10.0.0.8 0.0.0.3 area 0
+network 10.0.0.4 0.0.0.3 area 0
+!Não gastar processamento e memoria com a interface Giga 0/0/0 
+passive-interface g 0/0/0
+exit
+do wr
