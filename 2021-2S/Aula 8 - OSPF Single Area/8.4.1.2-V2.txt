@@ -1,0 +1,86 @@
+	RA
+en
+conf t
+int g0/0
+ip add 172.31.0.1 255.255.254.0
+no shut
+int s0/0/0
+clock rate 4000000
+ip add 172.31.4.1 255.255.255.252
+no shut
+
+!Conf do Roteamento Dinamico OSPFv2
+router ospf 1
+router-id 1.1.1.1
+network 172.31.0.0 0.0.1.255 area 0
+network 172.31.4.0 0.0.0.3 area 0
+passive-interface g0/0
+exit
+do wr
+
+	RB
+en
+conf t
+int g0/0
+ip add 172.31.2.1 255.255.254.0
+no shut
+int s0/0/0
+ip add 172.31.4.2 255.255.255.252
+no shut
+exit
+
+!Conf ativar IPv6
+ipv6 unicast-routing
+ipv6 cef
+
+int s0/0/1
+clock rate 4000000
+ipv6 enable
+ipv6 add 2001:DB8:2::1/64
+no shut
+
+int g0/0
+ipv6 add 2001:DB8:1::1/64
+ipv6 add FE80::1 link-local
+no shut
+exit
+
+router ospf 1
+router-id 2.2.2.2
+network 172.31.2.0 0.0.1.255 area 0
+network 172.31.4.0 0.0.0.3 area 0
+passive-interface g0/0
+exit
+
+ipv6 router ospf 1
+router-id 2.2.2.2
+area 0 range 2001:DB8:2::/64
+area 0 range 2001:DB8:1::/64
+end
+
+
+	RC
+en
+conf t
+
+!Conf ativar IPv6
+ipv6 unicast-routing
+ipv6 cef
+
+int g0/0
+ipv6 enable
+ipv6 add 2001:DB8:3::1/64
+ipv6 add FE80::3 link-local
+no shut
+int s0/0/0
+ipv6 enable
+ipv6 add 2001:DB8:2::2/64
+no shut
+exit
+
+
+ipv6 router ospf 1
+router-id 3.3.3.3
+area 0 range 2001:DB8:3::/64
+area 0 range 2001:DB8:2::/64
+end
