@@ -1,0 +1,57 @@
+	RA
+en
+conf t
+int g0/0
+ip add 172.31.0.1 255.255.254.0
+no shut
+int s0/3/0
+ip add 172.31.4.1 255.255.255.252
+clock rate 4000000
+no shut
+
+router ospf 1
+router-id 1.1.1.1
+network 172.31.0.0 0.0.1.255 area 0
+network 172.31.4.0 0.0.0.3 area 0
+passive-interface g0/1
+exit
+
+	RB
+en
+conf t
+int g0/0
+ip add 172.31.2.1 255.255.254.0
+no shut
+int s0/3/1
+ip add 172.31.4.2 255.255.255.252
+no shut
+
+int s0/3/0
+ip add 172.31.4.5 255.255.255.252
+no shut
+
+router ospf 2
+router-id 2.2.2.2
+network 172.31.2.0 0.0.1.255 area 0
+network 172.31.4.0 0.0.0.3 area 0
+network 172.31.4.4 0.0.0.3 area 0
+passive-interface g0/1
+exit
+
+	RC
+en
+conf t
+int g0/0
+ip add 172.31.6.1 255.255.254.0
+no shut
+int s0/0/0
+ip add 172.31.4.6 255.255.255.252
+clock rate 4000000
+no shut
+
+router ospf 3
+router-id 3.3.3.3
+network 172.31.6.0 0.0.1.255 area 0
+network 172.31.4.4 0.0.0.3 area 0
+passive-interface g0/1
+exit
