@@ -1,0 +1,90 @@
+!Script VLAN configuration
+!Script VLAN S1
+enable
+    configure terminal
+        vlan 10
+            name Faculty/Staff
+        vlan 20
+            name Students
+        vlan 30
+            name Guest(Default)
+        vlan 99
+            name Management&Native
+        vlan 150
+            name VOICE
+        interface g0/2
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,150
+            do wr
+            exit
+        interface g0/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,150
+            do wr
+            exit
+!Script VLAN S2
+enable 
+    configure terminal
+        vlan 10
+            name Faculty/Staff
+        vlan 20
+            name Students
+        vlan 30
+            name Guest(Default)
+        vlan 99
+            name Management&Native
+        vlan 150
+            name VOICE
+        interface f0/11
+            switchport mode access
+            switchport access vlan 10
+            exit
+        interface f0/18
+            switchport mode access
+            switchport access vlan 20
+            exit
+        interface f0/6
+            switchport mode access
+            switchpor access vlan 30
+        interface g0/1
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,150
+            do wr
+!Script VLAN S3
+enable 
+    configure terminal
+        vlan 10
+            name Faculty/Staff
+        vlan 20
+            name Students
+        vlan 30
+            name Guest(Default)
+        vlan 99
+            name Management&Native
+        vlan 150
+            name VOICE
+        interface f0/11
+            switchport mode access
+            switchport access vlan 10
+            mls qos trust cos
+            switchport voice vlan 150 
+            exit
+        interface f0/18
+            switchport mode access
+            switchport access vlan 20
+            exit
+        interface f0/6
+            switchport mode access
+            switchport access vlan 30
+            exit
+        interface g0/2
+            switchport mode trunk
+            switchport trunk native vlan 99
+            switchport trunk allowed vlan 10,20,30,150
+            do wr
+            exit
+
+        
