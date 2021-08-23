@@ -1,0 +1,24 @@
+Server
+vtp mode server
+vtp domain SENAI 
+vtp password 123456
+
+Cliente
+vtp mode client
+vtp domain SENAI 
+vtp password 123456
+
+Verificar VTP (Server - Cliente - Transparete)
+show vtp status
+
+Verificar Senha VTP / Domónio
+show vtp password
+
+Verificar DTP (por padrão vem auto)
+show interfaces switchport 
+show int trunk (Coluna Mode)
+
+Verificar DTP (Filtro em porta Giga)
+show interfaces switchport | begin Name: Gig 
+
+

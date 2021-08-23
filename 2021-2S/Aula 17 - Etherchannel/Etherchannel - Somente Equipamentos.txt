@@ -1,0 +1,52 @@
+	SW1
+en
+conf t
+int range f0/2-5
+channel-protocol pagp
+channel-group 1 mode auto
+no shut
+exit
+
+
+	SW2
+en
+conf t
+int range f0/2-5
+channel-protocol pagp
+channel-group 1 mode desirable
+no shut
+exit
+
+int range f0/6-9
+channel-protocol lacp
+channel-group 2 mode active
+no shut
+exit
+
+
+	SW3
+en
+conf t
+int range f0/6-9
+channel-protocol lacp
+channel-group 2 mode passive
+no shut
+exit
+
+int range f0/10-13
+channel-protocol lacp
+!Errado
+channel-group 3 mode on 
+no shut
+exit
+
+
+	SW4
+en
+conf t
+int range f0/10-13
+channel-protocol lacp
+!Errado
+channel-group 3 mode on
+no shut
+exit
