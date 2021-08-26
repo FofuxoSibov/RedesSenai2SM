@@ -1,0 +1,51 @@
+Verificar IPs
+#show ip interface brief
+
+Verificar outside e inside em alguma interface
+#show run
+
+Verificar rotas
+#show ip route
+
+Verificar rotas
+#show ip nat statistics
+
+Após inserir nat
+#show ip nat translations
+Pro  Inside global     Inside local       Outside local      Outside global
+---  64.100.50.1       172.16.16.1        ---                ---
+
+#show run
+interface GigabitEthernet0/0
+ ip address 172.16.16.14 255.255.255.240
+ ip nat inside
+ duplex auto
+ speed auto
+!
+interface Serial0/0/0
+ ip address 209.165.128.130 255.255.255.248
+ ip nat outside
+!
+
+
+show ip nat statistics
+Total translations: 1 (1 static, 0 dynamic, 0 extended)
+Outside Interfaces: Serial0/0/0
+Inside Interfaces: GigabitEthernet0/0
+
+	R1
+en
+conf t
+interface gigabitEthernet 0/0
+ip nat inside
+exit
+interface serial 0/0/0
+ip nat outside
+exit 
+
+!Regra de NAT Estatico por IP (inclui todas as portas)
+ip nat inside source static 172.16.16.1 64.100.50.1
+
+!By Lucas Cabral Manha 1-2021
+!Regra de NAT Estatico por Porta
+ip nat inside source static tcp 172.16.16.1 80 64.100.50.1 80
