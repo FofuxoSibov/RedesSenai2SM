@@ -1,0 +1,17 @@
+Verificar as ACLs
+show access-lists
+
+Verificar em qual porta esta aplicada a ACL
+show running-config
+
+interface Serial0/0/0
+ ip address 10.10.1.1 255.255.255.252
+ ip access-group 11 out
+
+	R1
+en
+conf t
+interface serial 0/0/0
+no ip access-group 11 out
+exit
+R1(config)#no access-list 11
