@@ -1,4 +1,6 @@
 show run
+en
+conf t
 ip access-list standard FROM_192
  deny 192.168.0.0 0.0.0.255
  permit any
@@ -17,15 +19,23 @@ interface GigabitEthernet0/1
 
 Teste de ping do L2 para o Servidor 1 - 172.16.255.254
 
+Alteração realizado 30/30
+
 R1
 
 enable
 conf t
 interface gigabitEthernet 0/0
 ip access-group FROM_192 out
+exit
 
 ip access-list standard FROM_10
 no deny host 10.0.0.22
 5 deny host 10.0.0.2
+exit
+
+ip access-list standard FROM_172
+no deny host 172.16.0.2
+
 
 
