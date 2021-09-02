@@ -1,0 +1,39 @@
+	R2
+en
+conf t
+!Declarar as Interfaces
+int se 0/1/0
+ip nat outside
+int se 0/0/0
+ip nat inside
+int se 0/0/1
+ip nat inside
+int fa 0/0
+ip nat inside
+exit
+
+!Criar a ACL
+ip access-list standard R2NAT
+permit 192.168.10.0 0.0.0.255
+permit 192.168.20.0 0.0.0.255
+permit 192.168.30.0 0.0.0.255
+exit
+
+!Criar o POOL
+ip nat pool R2POOL 209.165.202.129 209.165.202.129 netmask 255.255.255.252
+
+!Criar o NAT com Overload ou PAT
+ip nat inside source list R2NAT pool R2POOL overload
+
+!Criar o NAT Estatico sem Segurança
+ip nat inside source static 192.168.20.254 209.165.202.130
+
+-----------BONUS------------------
+
+!Criar o NAT Estatico com Segurança
+ip nat inside source static tcp 192.168.20.254 80 209.165.202.130 80
+ip nat inside source static tcp 192.168.20.254 443 209.165.202.130 443
+
+!Criar o NAT Dinamico sem Overload
+ip nat inside source list R2NAT pool R2POOL
+
