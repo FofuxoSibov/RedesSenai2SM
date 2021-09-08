@@ -1,0 +1,67 @@
+	ISP
+en
+conf t
+hostname VIVO
+int g0/0
+ip add 200.201.202.1 255.255.255.252
+no shut
+int g0/2
+ip add 200.201.203.1 255.255.255.252
+no shut
+int g0/1
+ip add 8.8.8.1 255.255.255.0
+no shut
+exit
+
+
+	R1
+en
+conf t
+int g0/0
+ip add 200.201.202.2 255.255.255.252
+no shut
+ip nat outside
+int g0/1
+ip add 192.168.0.2 255.255.255.0
+no shut
+ip nat inside
+standby version 2
+standby 1 ip 192.168.0.1
+standby 1 priority 150
+standby 1 preempt
+
+ip access-list standard Libera192
+permit 192.168.0.0 0.0.0.255
+deny any
+
+ip nat pool 1IPWan 200.201.202.2 200.201.202.2 netmask 255.255.255.252
+
+ip nat inside source list Libera192 pool 1IPWan overload
+
+ip route 0.0.0.0 0.0.0.0 200.201.202.1
+
+	R2
+en
+conf t
+int g0/0
+ip add 200.201.203.2 255.255.255.252
+no shut
+ip nat outside
+int g0/1
+ip add 192.168.0.3 255.255.255.0
+no shut
+ip nat inside
+standby version 2
+standby 1 ip 192.168.0.1
+standby 1 priority 100
+standby 1 preempt
+
+ip access-list standard Libera192
+permit 192.168.0.0 0.0.0.255
+deny any
+
+ip nat pool 1IPWan 200.201.203.2 200.201.203.2 netmask 255.255.255.252
+
+ip nat inside source list Libera192 pool 1IPWan overload
+
+ip route 0.0.0.0 0.0.0.0 200.201.203.1
