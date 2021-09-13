@@ -1,0 +1,61 @@
+	R1
+en
+conf t
+
+hostname R1
+int g0/0
+ip add 192.168.10.1 255.255.255.0
+no shut
+ip nat inside
+exit
+
+!DHCP Server
+ip dhcp excluded-address 192.168.10.1 192.168.10.10
+ip dhcp pool R1-LAN
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 192.168.10.2
+exit
+
+!DHCP Client
+interface g0/1
+ip address dhcp
+no shutdown
+ip nat outside
+exit
+
+ip route 0.0.0.0 0.0.0.0 g0/1
+
+ip access-list standard LiberaRede192
+permit 192.168.10.0 0.0.0.255
+deny any
+exit
+
+ip nat pool IPWAN 200.1.10.3 200.1.10.3 netmask 255.255.255.248
+
+ip nat inside source list LiberaRede192 pool IPWAN overload
+
+
+	VIVO
+en
+conf t
+
+hostname VIVO
+
+int g0/0
+ip add 200.1.10.1 255.255.255.248
+no shut
+exit
+
+int g0/1
+ip add 200.200.10.1 255.255.255.248
+no shut
+exit
+
+
+!DHCP Server
+ip dhcp excluded-address 200.1.10.1 200.1.10.2
+ip dhcp pool R1-LAN
+network 200.1.10.0 255.255.255.248
+default-router 200.1.10.1
+dns-server 8.8.8.8
