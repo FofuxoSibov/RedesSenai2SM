@@ -1,0 +1,77 @@
+TIM
+
+en
+conf t
+hostname TIM
+int g0/0/0
+ip add 200.1.0.6 255.255.255.248
+no shutdown
+int s0/1/0 
+ip add 189.190.190.1 255.255.255.252
+no shutdown
+exit
+router bgp 13200
+network 189.190.190.0 mask 255.255.255.252
+network 200.1.0.0 mask 255.255.255.248
+neighbor 189.190.190.2 remote-as 13201
+
+
+
+VIVOCLI
+
+en
+conf t
+hostname VIVOCLI
+int g0/0/0 
+ip add 200.0.0.254 255.255.255.0
+no shutdown
+int s0/1/0 
+ip add 189.190.192.2 255.255.255.252
+no shutdown
+exit
+router bgp 20000
+network 189.190.192.0 mask 255.255.255.252
+network 200.0.0.0 mask 255.255.255.0
+neighbor 189.190.192.1 remote-as 13202
+
+VIVO1
+
+en
+conf t 
+hostname VIVO1
+int s0/1/0
+ip add 189.190.190.2 255.255.255.252
+no shutdown
+int s0/1/1
+ip add 189.190.191.1 255.255.255.252
+no shutdown
+exit
+router bgp 13201
+network 189.190.190.0 mask 255.255.255.252
+network 189.190.191.0 mask 255.255.255.252
+neighbor 189.190.191.2 remote-as 13202
+neighbor 189.190.190.1 remote-as 13200
+
+VIVO2
+
+en
+conf t
+hostname VIVO2
+int s0/1/1
+ip add 189.190.191.2 255.255.255.252
+no shutdown
+int s0/1/0
+ip add 189.190.192.1 255.255.255.252
+no shutdown
+router bgp 13202
+network 189.190.191.0 mask 255.255.255.252
+network 189.190.192.0 mask 255.255.255.252
+neighbor 189.190.191.1 remote-as 13201
+neighbor 189.190.192.2 remote-as 20000
+
+
+
+
+
+
+
