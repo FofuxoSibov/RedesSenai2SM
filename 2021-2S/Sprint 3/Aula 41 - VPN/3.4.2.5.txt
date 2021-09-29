@@ -2,7 +2,7 @@
 	RA
 en
 conf t
-!Corrigir IPs invertidos
+!1° Corrigir IPs invertidos
 int g0/0
 no ip add
 int tunnel 0
@@ -12,15 +12,16 @@ int g0/0
 ip address 172.31.0.1 255.255.255.0
 exit
 
-!Corrigir rota 
+!2° Corrigir rota 
 no ip route 172.31.1.0 255.255.255.0 64.103.211.2
 ip route 172.31.1.0 255.255.255.0 192.168.1.2
 
 	RB
 en
 conf t
-!Corrigir interface de saida
+!3° Corrigir interface de saida
 int tunnel 0
 tunnel source serial 0/0/0
-!Corrigir IP do roteador vizinho
+
+!4° Corrigir IP do roteador vizinho
 tunnel destination 209.165.122.2
